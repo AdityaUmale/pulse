@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import Image from "next/image";
 
 
 const registerSchema = z.object({
@@ -81,6 +82,7 @@ export function RegisterForm() {
                                         type="button"
                                         disabled={isPending}
                                     >
+                                        <Image src="/logos/github.svg" width={20} height={20} alt="github" />
                                         Continue with github
 
                                     </Button>
@@ -90,6 +92,7 @@ export function RegisterForm() {
                                         type="button"
                                         disabled={isPending}
                                     >
+                                        <Image src="/logos/google.svg" width={20} height={20} alt="google" />
                                         Continue with google
 
                                     </Button>
