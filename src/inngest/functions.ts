@@ -13,34 +13,39 @@ export const execute = inngest.createFunction(
   { event: "execute/ai" },
   async ({ event, step }) => {
 
-    const { steps: geminiSteps } = await step.ai.wrap( 
-      "gemini-generate-text", 
-      generateText , 
+    const { steps: geminiSteps } = await step.ai.wrap(
+      "gemini-generate-text",
+      generateText,
       {
-      model: google("gemini-2.5-flash"),
-      system: "You are a helpful assistant.",
-      prompt: "what is 2 + 2?"
+        model: google("gemini-2.5-flash"),
+        system: "You are a helpful assistant.",
+        prompt: "what is 2 + 2?",
+        experimental_telemetry: {
+          isEnabled: true,
+          recordInputs: true,
+          recordOutputs: true,
+        },
       }
     )
-    const { steps: openaiSteps } = await step.ai.wrap( 
-      "openai-generate-text", 
-      generateText , 
+    const { steps: openaiSteps } = await step.ai.wrap(
+      "openai-generate-text",
+      generateText,
       {
-      model: openai("gpt-3.5-turbo"),
-      system: "You are a helpful assistant.",
-      prompt: "what is 2 + 2?"
+        model: openai("gpt-3.5-turbo"),
+        system: "You are a helpful assistant.",
+        prompt: "what is 2 + 2?"
       }
     )
-    const { steps: anthropicSteps } = await step.ai.wrap( 
-      "anthropic-generate-text", 
-      generateText , 
+    const { steps: anthropicSteps } = await step.ai.wrap(
+      "anthropic-generate-text",
+      generateText,
       {
-      model: anthropic("claude-3-5-sonnet"),
-      system: "You are a helpful assistant.",
-      prompt: "what is 2 + 2?"
+        model: anthropic("claude-3-5-sonnet"),
+        system: "You are a helpful assistant.",
+        prompt: "what is 2 + 2?"
       }
     )
     return { geminiSteps, openaiSteps, anthropicSteps };
-   
+
   },
 );
