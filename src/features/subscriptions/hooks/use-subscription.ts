@@ -38,7 +38,7 @@ export const premiumProcedure = protectedProcedure.use(
                 code: "FORBIDDEN",
                 message: "Premium required",
             });
-        }
+        };
         return next({ ctx: { ...ctx, customer } })
     }
 )
