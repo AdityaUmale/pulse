@@ -40,3 +40,4 @@ export const protectedProcedure = baseProcedure.use(async ({ ctx,
     ctx: { ...ctx, auth: session}
   });
 });
+

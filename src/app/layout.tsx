@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { TRPCReactProvider } from "@/trpc/client";
 
 export const metadata: Metadata = {
     title: "Pulse",
@@ -14,7 +15,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                {children}
+                <TRPCReactProvider>
+                    {children}
+                </TRPCReactProvider>
             </body>
         </html>
     );

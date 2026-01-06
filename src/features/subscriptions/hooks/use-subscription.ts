@@ -1,8 +1,6 @@
+// Imports removed
 import { authClient } from "@/lib/auth-client"
-import { protectedProcedure } from "@/trpc/init";
-import { polarClient } from "@/lib/polar";
 import { useQuery } from "@tanstack/react-query";
-import { TRPCError } from "@trpc/server";
 
 
 export const useSubscription = () => {
@@ -26,19 +24,3 @@ export const useHasActiveSubscription = () => {
         ...rest
     }
 }
-
-export const premiumProcedure = protectedProcedure.use(
-    async ({ ctx, next }) => {
-        const customer = await polarClient.customers.getStateExternal({
-            externalId: ctx.auth.user.id,
-        });
-
-        if (!customer.activeSubscriptions || customer.activeSubscriptions.length === 0) {
-            throw new TRPCError({
-                code: "FORBIDDEN",
-                message: "Premium required",
-            });
-        };
-        return next({ ctx: { ...ctx, customer } })
-    }
-)
