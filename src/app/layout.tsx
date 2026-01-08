@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { TRPCReactProvider } from "@/trpc/client";
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
     title: "Pulse",
@@ -16,7 +18,10 @@ export default function RootLayout({
         <html lang="en">
             <body>
                 <TRPCReactProvider>
-                    {children}
+                    <NuqsAdapter>
+                        {children}
+                        <Toaster/>
+                    </NuqsAdapter>
                 </TRPCReactProvider>
             </body>
         </html>
