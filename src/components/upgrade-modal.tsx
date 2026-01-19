@@ -31,7 +31,7 @@ export const UpgradeModal = ({ open, onOpenChange }: UpgradeModalProps) => {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => authClient.checkout({ slug: "pro" })}>Upgrade</AlertDialogAction>
+                    <AlertDialogAction onClick={() => authClient.checkout({ slug: "premium" })}>Upgrade</AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

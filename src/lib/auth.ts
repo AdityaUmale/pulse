@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { polar, checkout, portal } from "@polar-sh/better-auth";
+import { polar, checkout, portal, webhooks } from "@polar-sh/better-auth";
 import prisma from "./db";
 import { polarClient } from "./polar";
 
@@ -22,14 +22,21 @@ export const auth = betterAuth({
         checkout({
           products: [
             {
-              productId: "57e65cec-078e-4069-b52d-84eb9f82fb20",
-              slug: "pro"
+              productId: "dad6cd33-ba3a-4b89-b417-e7de840e32fa",
+              slug: "premium"
             }
           ],
           successUrl: process.env.POLAR_SUCCESS_URL,
           authenticatedUsersOnly: true,
         }),
-        portal()
+        portal(),
+        webhooks({
+          secret: process.env.POLAR_WEBHOOK_SECRET!,
+          onPayload: async (payload) => {
+            console.log("[Polar Webhook] Event received:", payload.type);
+            console.log("[Polar Webhook] Payload:", JSON.stringify(payload, null, 2));
+          }
+        })
       ]
     })
   ],
